@@ -1,7 +1,9 @@
 const connection = require('../config/database');
+const { getAllUsers } = require('../services/UserService')
 
-const getHomePage = (req, res) => {
-    return res.render('home.ejs') //render ra view
+const getHomePage = async (req, res) => {
+    let results = await getAllUsers();
+    return res.render('home.ejs', { users: results });
 }
 
 const postCreateUser = async (req, res) => {
@@ -10,10 +12,10 @@ const postCreateUser = async (req, res) => {
     let city = req.body.city;
     // let {email, name, city} = req.body;
 
-    const sql = "INSERT INTO Users (email, name, city) VALUES (?, ?, ?)";
-    const values = [email, name, city];
+    let sql = "INSERT INTO Users (email, name, city) VALUES (?, ?, ?)";
+    let values = [email, name, city];
 
-    const [result, fields] = await connection.execute(sql, values);
+    let [result, fields] = await connection.execute(sql, values);
 
     res.send('Created user succeed !');
 }

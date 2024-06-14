@@ -1,58 +1,71 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <link rel="stylesheet" href="/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Page</title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <style>
-    .table-container {
-        padding: 15px 20px;
-    }
+  .table-container {
+    padding: 15px 20px;
+  }
 
-    .title {
-        font-size: 25px;
-        font-weight: 600;
-        padding-bottom: 10px;
-    }
+  .title {
+    font-size: 25px;
+    font-weight: 600;
+    padding-bottom: 10px;
+  }
 
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
 
-    th,
-    td {
-        padding: 8px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-    }
+  th,
+  td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
 
-    tr:hover {
-        background-color: #ccc;
-    }
+  tr:hover {
+    background-color: #ccc;
+  }
 </style>
 
 <body>
-    <div class="topnav">
-        <a class="active" href="/">Home</a>
-        <a href="/create">Create Users</a>
-    </div>
+  <div class="topnav">
+    <a class="active" href="/">Home</a>
+    <a href="/create">Create Users</a>
+  </div>
 
-    <div class="table-container">
-        <div class="title">List Users</div>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Email</th>
-                <th>Name</th>
-                <th>City</th>
-            </tr>
-            
-        </table>
-    </div>
+  <div class="table-container">
+    <div class="title">List Users</div>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Name</th>
+        <th>City</th>
+        <th>Actions</th>
+      </tr>
+
+      <% for (let i=0; i < users.length; i++) { %>
+      <tr>
+        <td><%= users[i].id %></td>
+        <td><%= users[i].email %></td>
+        <td><%= users[i].name %></td>
+        <td><%= users[i].city %></td>
+        <td>
+          <button>Edit</button>
+          <button>Delete</button>
+        </td>
+      </tr>
+      <% } %>
+    </table>
+  </div>
 
 </body>
 
