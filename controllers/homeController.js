@@ -4,7 +4,7 @@ const getHomePage = (req, res) => {
     return res.render('home.ejs') //render ra view
 }
 
-const postCreateUser = (req, res) => {
+const postCreateUser = async (req, res) => {
     let email = req.body.email;
     let name = req.body.name;
     let city = req.body.city;
@@ -13,17 +13,15 @@ const postCreateUser = (req, res) => {
     const sql = "INSERT INTO Users (email, name, city) VALUES (?, ?, ?)";
     const values = [email, name, city];
 
-    connection.query(sql, values, (err, result, fields) => {
-        if (err instanceof Error) {
-            console.log(err);
-            return;
-        }
-        console.log(result);
-    });
+    const [result, fields] = await connection.execute(sql, values);
 
     res.send('Created user succeed !');
 }
 
+const getCreateUserPage = (req, res) => {
+    res.render('create.ejs')
+}
+
 module.exports = {
-    getHomePage, postCreateUser
+    getHomePage, postCreateUser, getCreateUserPage
 }
