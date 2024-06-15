@@ -10,25 +10,26 @@
 <body>
     <div class="topnav">
         <a href="/">Home</a>
-        <a class="active" href="/users/create">Create User</a>
+        <a href="/users/create">Create User</a>
     </div>
 
     <div class="form-add-new">
-        <form action="/users/store" method="POST">
+        <form action="/users/update/<%= user.id %>" method="POST">
             <div class="form-add-new">
                 <fieldset>
-                    <legend>Add new user</legend>
+                    <legend>Update user</legend>
+                    <input type="hidden" name="id" value="<%= user.id %>">
                     <div class="input-group">
                         <label for="">Email</label>
-                        <input type="text" name="email" id="">
+                        <input type="text" name="email" value="<%= user.email %>">
                     </div>
                     <div class="input-group">
                         <label for="">Name</label>
-                        <input type="text" name="name" id="">
+                        <input type="text" name="name" value="<%= user.name %>">
                     </div>
                     <div class="input-group">
                         <label for="">City</label>
-                        <input type="text" name="city" id="">
+                        <input type="text" name="city" value="<%= user.city %>">
                     </div>
                     <div>
                         <button>Save</button>
