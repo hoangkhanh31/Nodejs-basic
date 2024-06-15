@@ -1,5 +1,5 @@
 const connection = require('../config/database');
-const { getAllUsers, getUserById, updateUserById } = require('../services/UserService')
+const { getAllUsers, getUserById, updateUserById, deleteUserById } = require('../services/UserService')
 
 const getHomePage = async (req, res) => {
     let results = await getAllUsers();
@@ -17,7 +17,7 @@ const postCreateUser = async (req, res) => {
 
     let [result, fields] = await connection.execute(sql, values);
 
-    res.send('Created user succeed !');
+    res.redirect('/');
 }
 
 const getCreateUserPage = (req, res) => {
@@ -35,14 +35,20 @@ const postUpdateUser = async (req, res) => {
     let email = req.body.email;
     let name = req.body.name;
     let city = req.body.city;
-    
+
     await updateUserById(id, email, name, city);
 
+    res.redirect('/');
+}
+
+const postDeleteUser = async (req, res) => {
+    let userId = req.params.id;
+    await deleteUserById(userId);
     res.redirect('/');
 }
 
 module.exports = {
     getHomePage, postCreateUser,
     getCreateUserPage, getUpdateUserPage,
-    postUpdateUser
+    postUpdateUser, postDeleteUser
 }

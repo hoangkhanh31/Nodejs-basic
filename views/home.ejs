@@ -60,7 +60,9 @@
         <td><%= users[i].city %></td>
         <td>
           <a href="users/update/<%= users[i].id %>">Edit</a>
-          <button>Delete</button>
+          <form action="/users/delete/<%= users[i].id %>" method="POST">
+            <button>Delete</button>
+          </form>
         </td>
       </tr>
       <% } %>
